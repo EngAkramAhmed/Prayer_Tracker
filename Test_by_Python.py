@@ -193,11 +193,13 @@ def Data(students):
 
         week1 = percentage(
             student["week1_missing"],
-            student["week1_unknown"])
+            student["week1_unknown"]
+        )
 
         week2 = percentage(
             student["week2_missing"],
-            student["week2_unknown"])
+            student["week2_unknown"]
+        )
 
         difference = week2 - week1
 
@@ -217,7 +219,7 @@ def Data(students):
 
     print("_" * 90)
 
-    # makePdf(names, differences, real_diff)
+    makePdf(names, differences, real_diff)
 
 
 Data(students)
