@@ -1,36 +1,38 @@
-from reportlab.lib.pagesizes import letter, landscape                                    # type: ignore
+from reportlab.lib.pagesizes import letter, landscape # type: ignore
 from reportlab.platypus import (SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer) # type: ignore
-from reportlab.lib import colors                                                         # type: ignore
-from reportlab.lib.styles import getSampleStyleSheet                                     # type: ignore
-from reportlab.lib.units import inch                                                     # type: ignore
+from reportlab.lib import colors                      # type: ignore
+from reportlab.lib.styles import getSampleStyleSheet  # type: ignore
+from reportlab.lib.units import inch                  # type: ignore
 
-total_days = 7 # The number refers to the Total days in the period being analyzed like (Week).
+total_days = 7 # Total days in the period being analyzed (Ex. -> Week = 7)
+filename = "Report_2.pdf" # Output PDF file name
+PDF_title = "2st week of May (from 9 to 15) --- VS --- 3nd week of May (from 16 to 22)"
 
 
 students = [
 
-   # "Student Name", {[Missing Prayers, Unknown Days] -> for 1st & 2nd periods}
+  # ("Student Name", [Missing Prayers, Unknown Days] -> for 1st & 2nd periods)
 
-    ("00. Test Case Student",  [0, 1], [0, 0]),
-    ("01. Akram Ahmed",        [3, 0], [1, 0]),
-    ("02. Ali Mohammed",       [1, 0], [3, 0]),
-    ("03. Ahmed Nasr",         [2, 3], [5, 0]),
-    ("04. Karim Mohammed",     [6, 1], [6, 2]),
-    ("05. Omar Anwar",         [9, 1], [7, 0]),
-    ("06. Youssef Hussein",    [3, 1], [3, 0]),
-    ("07. Sayed Al-Ghannam",   [3, 4], [2, 4]),
-    ("08. Ahmed Mohammed",     [1, 4], [1, 4]),
-    ("09. Saleh Mahmoud",      [1, 2], [0, 0]),
-    ("10. Ahmed Hamada",       [4, 0], [5, 0]),
-    ("11. Ahmed El-Shahat",    [2, 6], [7, 2]),
-    ("12. Mohammed Abu-Saree", [2, 2], [10, 0])
+    ("01. Akram Ahmed",          [2, 0], [0, 0]),
+    ("02. Ali Mohammed",         [3, 0], [0, 0]),
+    ("03. Ahmed Nasr",           [5, 0], [0, 0]),
+    ("04. Karim Mohammed",       [8, 1], [0, 0]),
+    ("05. Omar Anwar",           [9, 0], [0, 0]),
+    ("06. Youssef Hussein",      [4, 0], [0, 0]),
+    ("07. Sayed Al-Ghannam",     [3, 3], [0, 0]),
+    ("08. Ahmed Mohammed",       [2, 4], [0, 0]),
+    ("09. Saleh Mahmoud",        [0, 0], [0, 0]),
+    ("10. Ahmed Hamada",         [6, 0], [0, 0]),
+    ("11. Ahmed El-Shahat",      [6, 3], [0, 0]),
+    ("12. Mohammed Abu-Saree",   [9, 0], [0, 0]),
+    ("13. Osama Kamal",          [6, 2], [0, 0]),
+    ("14. Ibrahim Kamal",        [4, 2], [0, 0]),
+    ("15. AbdelRahman Mohammed", [1, 5], [0, 0])
 
 ]
 
 
 def makeDashboardPDF(rows):
-
-    filename = "Report.pdf"
 
     doc = SimpleDocTemplate(
         filename,
@@ -46,10 +48,7 @@ def makeDashboardPDF(rows):
     styles = getSampleStyleSheet()
 
     # ===== TITLE =====
-    title = Paragraph(
-        f"1st week of May (from 3 to 9) --- VS --- 2nd week of May (from 10 to 16)",
-        styles["Title"]
-    )
+    title = Paragraph(PDF_title, styles["Title"])
 
     elements.append(title)
     elements.append(Spacer(1, 20))
@@ -151,7 +150,7 @@ def Data(students):
     def percentage(missing_prayers, unknown_days):
 
         known_days    =   total_days  -  unknown_days
-        total_prayers =   known_days  * 5 # The number 5 refers to the number of prayers in a day.
+        total_prayers =   known_days  * 5 # prayers per day.
         prayed        = total_prayers - missing_prayers
 
         return (prayed / total_prayers) * 100
