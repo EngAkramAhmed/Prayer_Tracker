@@ -4,9 +4,12 @@ from reportlab.lib import colors                      # type: ignore
 from reportlab.lib.styles import getSampleStyleSheet  # type: ignore
 from reportlab.lib.units import inch                  # type: ignore
 
-total_days = 7 # Total days in the period being analyzed (Ex. -> Week = 7)
-filename = "Report_2.pdf" # Output PDF file name
-PDF_title = "2st week of May (from 9 to 15) --- VS --- 3nd week of May (from 16 to 22)"
+
+total_days = 7
+period_1_name = "2nd week of May"
+period_2_name = "3rd week of May"
+PDF_title = f"{period_1_name} (from 9 to 15) --- VS --- {period_2_name} (from 16 to 22)"
+filename = "Report_2.pdf"
 
 
 students = [
@@ -32,7 +35,7 @@ students = [
 ]
 
 
-def makeDashboardPDF(rows):
+def makePDF(rows):
 
     doc = SimpleDocTemplate(
         filename,
@@ -56,8 +59,8 @@ def makeDashboardPDF(rows):
     # ===== TABLE DATA =====
     data = [[
             "Student Name",
-            "1st week of May", "Unknown1",
-            "2nd week of May", "Unknown2",
+            period_1_name, "Unknown.1",
+            period_2_name, "Unknown.2",
             "Difference"
         ]]
 
@@ -122,7 +125,9 @@ def makeDashboardPDF(rows):
     # ===== Difference Colors =====
     for i in range(1, len(data)):
 
-        diff = data[i][5]
+        diff     = data[i][5]
+        unknown1 = data[i][2]
+        unknown2 = data[i][4]
 
         if "+" in diff:
             style.add("TEXTCOLOR", (3, i), (3, i), colors.green)
@@ -137,6 +142,12 @@ def makeDashboardPDF(rows):
             style.add("TEXTCOLOR", (5, i), (5, i), colors.red)
         else:
             style.add("TEXTCOLOR", (5, i), (5, i), colors.blue)
+
+        if unknown1 != "•":
+            style.add("TEXTCOLOR", (2, i), (2, i), colors.orangered)
+
+        if unknown2 != "•":
+            style.add("TEXTCOLOR", (4, i), (4, i), colors.orangered)
 
     table.setStyle(style)
 
@@ -194,7 +205,7 @@ def Data(students):
             diff_text
         ])
 
-    makeDashboardPDF(rows)
+    makePDF(rows)
 
 
 Data(students)
