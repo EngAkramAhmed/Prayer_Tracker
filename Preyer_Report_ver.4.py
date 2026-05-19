@@ -1,16 +1,15 @@
-from reportlab.lib.pagesizes import letter, landscape        # type: ignore
-from reportlab.platypus import (                             # type: ignore
-    SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer)
-from reportlab.lib import colors                             # type: ignore
-from reportlab.lib.styles import getSampleStyleSheet         # type: ignore
-from reportlab.lib.units import inch                         # type: ignore
+from reportlab.lib.pagesizes import letter, landscape                                    # type: ignore
+from reportlab.platypus import (SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer) # type: ignore
+from reportlab.lib import colors                                                         # type: ignore
+from reportlab.lib.styles import getSampleStyleSheet                                     # type: ignore
+from reportlab.lib.units import inch                                                     # type: ignore
 
-total_days = 7             # Total days in the period being analyzed (Week)
+total_days = 7 # The number refers to the Total days in the period being analyzed like (Week).
 
 
 students = [
 
-  # ("Student Name", [Missing Prayers, Unknown Days] -> for 1st & 2nd periods)
+   # "Student Name", {[Missing Prayers, Unknown Days] -> for 1st & 2nd periods}
 
     ("00. Test Case Student",  [0, 1], [0, 0]),
     ("01. Akram Ahmed",        [3, 0], [1, 0]),
@@ -152,7 +151,7 @@ def Data(students):
     def percentage(missing_prayers, unknown_days):
 
         known_days    =   total_days  -  unknown_days
-        total_prayers =   known_days  * 5 # prayers per day.
+        total_prayers =   known_days  * 5 # The number 5 refers to the number of prayers in a day.
         prayed        = total_prayers - missing_prayers
 
         return (prayed / total_prayers) * 100
