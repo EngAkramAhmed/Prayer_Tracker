@@ -10,6 +10,8 @@ total_days = 7             # Total days in the period being analyzed (Week)
 
 students = [
 
+  # ("Student Name", [Missing Prayers, Unknown Days] -> for 1st & 2nd periods)
+
     ("00. Test Case Student",  [0, 1], [0, 0]),
     ("01. Akram Ahmed",        [3, 0], [1, 0]),
     ("02. Ali Mohammed",       [1, 0], [3, 0]),
